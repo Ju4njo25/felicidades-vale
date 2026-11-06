@@ -74,11 +74,6 @@
     return caja;
   }
 
-  function leerFecha(s) {
-    const m = /^(\d{4})-(\d{1,2})-(\d{1,2})(?:[ T](\d{1,2}):(\d{2}))?/.exec(String(s || "").trim());
-    return m ? new Date(+m[1], +m[2] - 1, +m[3], +(m[4] || 0), +(m[5] || 0)) : null;
-  }
-
   function centroDe(nodo) {
     const r = nodo.getBoundingClientRect();
     return { x: (r.left + r.width / 2) / innerWidth, y: (r.top + r.height / 2) / innerHeight };
@@ -124,30 +119,34 @@
   if (C.nombre) document.title = `¡Felicidades, ${C.nombre}! 🎓`;
 
   // ============================================================ 1. PORTADA
-  let botonCarta;
-
+  // Toda la portada es "tocable": al tocarla se abre la carta.
   function armarPortada() {
     const p = C.portada || {};
     const portada = $("#portada");
+    const pista = p.pista || "Toca para continuar";
     if (p.encuadre) portada.style.setProperty("--encuadre", p.encuadre);
+    portada.setAttribute("role", "button");
+    portada.setAttribute("tabindex", "0");
+    portada.setAttribute("aria-label", pista);
 
-    const gorro = el("button", { class: "gorro", type: "button", "aria-label": "Gorro de graduación", text: "🎓" });
-    const preTitulo = [C.generacion, C.colegio].filter(Boolean).join(" · ");
-    const contador = textoContador();
-    botonCarta = el("button", { class: "boton boton-carta", type: "button", text: p.boton || "💌 Toca aquí, te escribí una carta" });
-    botonCarta.addEventListener("click", abrirCarta);
+    const fondo = el("div", { class: "portada-fondo", "aria-hidden": "true" });
+    if (p.foto) fondo.style.backgroundImage = `url("${encodeURI(p.foto)}")`;
 
     portada.append(
+      fondo,
       el("figure", { class: "portada-foto" }, foto(p.foto, C.nombre, true)),
-      crearDestellos(18),
       el("div", { class: "portada-texto" },
-        el("p", { class: "pre-titulo" }, gorro, preTitulo ? el("span", { text: preTitulo }) : null),
-        el("h1", {}, (p.saludo || "¡Felicidades,") + " ", el("span", { class: "nombre-dorado", text: (C.nombre || "") + "!" })),
-        p.frase ? el("p", { class: "frase", text: p.frase }) : null,
-        contador ? el("div", { class: "contador", text: contador }) : null,
-        botonCarta));
+        p.texto ? el("h1", { class: "dedicatoria", text: p.texto }) : null,
+        el("p", { class: "toca", text: pista })));
 
-    // Mensaje secreto: tocar el gorro 5 veces seguidas
+    portada.addEventListener("click", abrirCarta);
+    portada.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); abrirCarta(); }
+    });
+  }
+
+  // Mensaje secreto: tocar el gorro 5 veces seguidas
+  function activarSecreto(gorro) {
     let toques = 0;
     let reinicio;
     gorro.addEventListener("animationend", (e) => { if (e.animationName === "saltar") gorro.classList.remove("salto"); });
@@ -167,18 +166,6 @@
     });
   }
 
-  function textoContador() {
-    const fecha = leerFecha(C.fechaGraduacion);
-    if (!fecha) return "";
-    const ahora = new Date();
-    const inicioDia = (d) => new Date(d.getFullYear(), d.getMonth(), d.getDate());
-    const dias = Math.round((inicioDia(fecha) - inicioDia(ahora)) / 86400000);
-    if (dias > 1) return `⏳ Faltan ${dias} días para tu graduación`;
-    if (dias === 1) return "⏳ ¡Mañana es tu graduación!";
-    if (dias === 0) return fecha > ahora ? "🎓 ¡Hoy es tu graduación!" : "🎉 ¡Hoy te graduaste!";
-    return `🎓 Egresada hace ${-dias} ${dias === -1 ? "día" : "días"}`;
-  }
-
   // ============================================================ abrir la carta
   let cartaAbierta = false;
 
@@ -191,7 +178,6 @@
     const mostrar = () => {
       contenido.hidden = false;
       document.body.classList.add("abierta");
-      botonCarta.textContent = "💌 Volver a leer la carta";
       saltarA(seccionCarta);
     };
 
@@ -219,8 +205,7 @@
   function armarCarta() {
     const d = C.carta || {};
     const seccion = el("section", { id: "carta", class: "bloque" });
-    const botonSeguir = el("button", { class: "boton", type: "button" },
-      d.boton || "Ahora mira esto 📸", el("span", { text: "↓", "aria-hidden": "true" }));
+    const botonSeguir = el("button", { class: "boton", type: "button", text: d.boton || "Fotitos" });
     botonSeguir.addEventListener("click", () => {
       const siguiente = seccion.nextElementSibling;
       if (siguiente) siguiente.scrollIntoView({ behavior: "smooth" });
@@ -252,14 +237,12 @@
 
     let orden = tarjetas.slice(); // orden[0] es la foto de arriba
     let ocupado = false;
-    const contador = el("span", { class: "monton-contador", "aria-live": "polite" });
 
     function acomodar() {
       orden.forEach((t, k) => {
         t.style.zIndex = String(orden.length - k);
         t.setAttribute("aria-hidden", k === 0 ? "false" : "true");
       });
-      contador.textContent = `${+orden[0].dataset.i + 1} / ${orden.length}`;
     }
 
     function siguiente(dir) {
@@ -329,13 +312,12 @@
     const controles = orden.length > 1
       ? el("div", { class: "monton-controles" },
           el("button", { class: "monton-btn", type: "button", "aria-label": "Foto anterior", text: "‹", onclick: () => anterior() }),
-          contador,
           el("button", { class: "monton-btn", type: "button", "aria-label": "Foto siguiente", text: "›", onclick: () => siguiente(1) }))
       : null;
 
     return el("section", { id: "fotos", class: "bloque alterno" },
       el("div", { class: "contenedor" },
-        encabezado(d, "Algunos recuerdos"),
+        d.titulo ? encabezado(d) : null, // sin título, salvo que agregues uno en contenido.js
         el("div", { class: "revelar" }, monton),
         controles));
   }
@@ -470,9 +452,12 @@
   function armarFinal() {
     const f = C.final || {};
     if (f.mostrar === false) return null;
+    const gorro = el("button", { class: "gorro", type: "button", "aria-label": "Gorro de graduación", text: "🎓" });
+    activarSecreto(gorro);
     return el("footer", { id: "final", class: "bloque oscuro final" },
       crearDestellos(20),
       el("div", { class: "contenedor" },
+        gorro,
         el("h2", { class: "revelar", text: f.titulo || "¡Lo lograste!" }),
         f.texto ? el("p", { class: "texto-final revelar", text: f.texto }) : null,
         el("button", { class: "boton", type: "button", text: f.boton || "🎉 ¡Más confeti!", onclick: () => lluviaConfeti() }),

@@ -2,9 +2,9 @@
 
 Página web pensada para verse desde el **celular**:
 
-1. **Portada**: una foto de ella a pantalla completa, su nombre y un botón.
-2. **Carta**: al tocar el botón se abre un sobre animado y aparece tu carta (con confeti).
-3. **Fotos**: debajo de la carta hay un montón de fotos tipo polaroid que se pasan tocándolas o deslizándolas con el dedo.
+1. **Portada**: una foto de ella a pantalla completa con el texto «De Juanjo para Vale» y abajo «Toca para continuar».
+2. **Carta**: al tocar la portada se abre un sobre animado y aparece tu carta (con confeti).
+3. **Fotos**: con el botón «Fotitos» bajas a un montón de fotos tipo polaroid que se pasan tocándolas, deslizándolas con el dedo o con los botones ‹ ›.
 4. **Final**: un mensaje de cierre con un botón de confeti.
 
 Además trae **extras** que vienen apagados y puedes activar (ver más abajo).
@@ -71,7 +71,7 @@ En la parte de abajo de `contenido.js`, cambia `mostrar: false` por `mostrar: tr
 - **deseos**: lista de deseos para lo que viene.
 
 ### 🤫 Secreto
-Si ella toca **5 veces seguidas el gorro 🎓** de la portada, aparece el `mensajeSecreto`. Al final de la página hay una pista.
+Si ella toca **5 veces seguidas el gorro 🎓** del final de la página, aparece el `mensajeSecreto`. Al final de la página hay una pista.
 
 ---
 

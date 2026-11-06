@@ -2,7 +2,7 @@
    ✏️  ESTE ES EL ÚNICO ARCHIVO QUE NECESITAS EDITAR
    -------------------------------------------------------------------
    Cómo se recorre la página:
-     1. PORTADA  → una foto de ella + un texto. Al tocar el botón...
+     1. PORTADA  → una foto de ella + un texto. Al tocarla...
      2. CARTA    → ...se abre un sobre y aparece tu carta.
      3. FOTOS    → debajo de la carta, un montón de fotos para ir pasando.
      4. FINAL    → mensaje de cierre con confeti.
@@ -25,13 +25,6 @@ window.CONTENIDO = {
 
   // ---------------- DATOS BÁSICOS ----------------
   nombre: "Vale",
-  colegio: "Colegio Nombre del Colegio",
-  generacion: "Generación 2026",
-
-  // Fecha de la graduación: "AÑO-MES-DÍA HORA:MIN"
-  // Antes de esa fecha la portada dice "Faltan X días"; después, "Egresada hace X días".
-  // Si no quieres el contador, déjalo vacío: ""
-  fechaGraduacion: "2026-12-05 19:00",
 
   // Colores de la página (busca "color picker" en Google para elegir otros)
   colores: {
@@ -44,7 +37,7 @@ window.CONTENIDO = {
   // Ejemplo: "musica/cancion.mp3"
   musica: "",
 
-  // Se muestra al tocar 5 veces seguidas el gorro 🎓 de la portada 🤫
+  // Se muestra al tocar 5 veces seguidas el gorro 🎓 del final de la página 🤫
   mensajeSecreto: "Si encontraste esto: te debo un helado 🍦. Es oficial, quedó por escrito.",
 
 
@@ -54,9 +47,8 @@ window.CONTENIDO = {
     // Qué parte de la foto se ve en el celular. Si se le corta la cara,
     // prueba con "center top", "center 20%", "center 50%"...
     encuadre: "center 25%",
-    saludo: "¡Felicidades,",
-    frase: "Lo lograste. Y no podría estar más orgulloso/a de ti.",
-    boton: "💌 Toca aquí, te escribí una carta",
+    texto: "De Juanjo para Vale",
+    pista: "Toca para continuar",
   },
 
 
@@ -72,16 +64,16 @@ Deja una línea en blanco, como aquí arriba, cada vez que quieras empezar un p�
     `,
     despedida: "Te quiero infinito,",
     firma: "Tu hermano/a",
-    boton: "Ahora mira esto 📸",
+    boton: "Fotitos",
   },
 
 
   // ================= 3. FOTOS =================
-  // Se ven como un montón de fotos: se pasan tocando o deslizando con el dedo.
+  // Se ven como un montón de fotos: se pasan tocando o deslizando con el dedo,
+  // o con los botones de abajo. El "texto" es lo que sale escrito bajo cada foto
+  // (si no quieres texto en una foto, déjalo vacío: "").
   // Puedes poner las que quieras: copia una línea y cambia el nombre.
   fotos: {
-    titulo: "Algunos recuerdos",
-    subtitulo: "Toca o desliza la foto para ver la siguiente",
     lista: [
       { foto: "fotos/foto-1.jpg", texto: "Escribe aquí algo sobre esta foto" },
       { foto: "fotos/foto-2.jpg", texto: "Vacaciones en la playa" },

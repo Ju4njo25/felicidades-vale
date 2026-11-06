@@ -111,7 +111,9 @@ button { font-family: inherit; }
   50% { opacity: 0.9; transform: scale(1); }
 }
 
-/* =================== 1. PORTADA (celular) =================== */
+/* =================== 1. PORTADA =================== */
+/* En celular la foto ocupa toda la pantalla y el texto va abajo.
+   Toda la portada se puede tocar para abrir la carta. */
 .portada {
   position: relative;
   min-height: 100vh;
@@ -122,8 +124,12 @@ button { font-family: inherit; }
   overflow: hidden;
   color: var(--blanco);
   background: var(--principal);
+  cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
 }
-.portada .destellos { top: 45%; }
+.portada:focus-visible { outline: 3px solid var(--acento); outline-offset: -6px; }
+.portada-fondo { display: none; }
 
 .portada-foto { position: absolute; inset: 0; margin: 0; }
 .portada-foto img {
@@ -137,52 +143,52 @@ button { font-family: inherit; }
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.25) 0%, transparent 16%);
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.18) 0%, transparent 12%);
 }
-.portada-foto .foto-falta { border: 0; justify-content: flex-start; padding-top: 14vh; }
-@keyframes acercar { from { transform: scale(1.12); } to { transform: scale(1); } }
+.portada-foto .foto-falta { border: 0; }
+@keyframes acercar { from { transform: scale(1.1); } to { transform: scale(1); } }
 
 .portada-texto {
   position: relative;
   z-index: 1;
-  padding: 24px 20px calc(28px + env(safe-area-inset-bottom));
+  padding: 0 20px calc(26px + env(safe-area-inset-bottom));
   text-align: center;
-  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.45);
 }
-/* Degradado detrás del texto: se adapta a lo largo que sea el texto */
+/* Sombra suave solo detrás del texto, para que la foto luzca */
 .portada-texto::before {
   content: "";
   position: absolute;
-  inset: -160px 0 0 0;
+  inset: -110px 0 0 0;
   z-index: -1;
-  background: linear-gradient(
-    to bottom,
-    transparent 0,
-    color-mix(in srgb, var(--principal), transparent 25%) 160px,
-    var(--principal) 75%
-  );
+  background: linear-gradient(to bottom, transparent 0, rgba(0, 0, 0, 0.4) 110px, rgba(0, 0, 0, 0.6) 100%);
 }
-.pre-titulo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
-  margin: 0 0 10px;
-  font-size: 0.72rem;
+.dedicatoria {
+  margin: 0;
+  font-family: var(--f-mano);
+  font-weight: 700;
+  font-size: clamp(2.3rem, 10.5vw, 3.8rem);
+  line-height: 1.05;
+}
+.toca {
+  margin: 14px 0 0;
+  font-size: 0.78rem;
   font-weight: 600;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: var(--acento);
+  animation: parpadeo 2.4s ease-in-out infinite;
 }
+@keyframes parpadeo { 0%, 100% { opacity: 0.45; } 50% { opacity: 1; } }
+
+/* Gorro del mensaje secreto (está en la sección final) */
 .gorro {
-  flex: none;
+  display: block;
+  margin: 0 auto 10px;
   padding: 0;
   border: 0;
   background: none;
-  font-size: 2.4rem;
+  font-size: 2.8rem;
   line-height: 1;
-  text-shadow: none;
   cursor: pointer;
   animation: flotar 3s ease-in-out infinite;
 }
@@ -196,50 +202,6 @@ button { font-family: inherit; }
   50% { transform: rotate(20deg) scale(1.4); }
   100% { transform: scale(1); }
 }
-
-.portada h1 { font-size: clamp(2.5rem, 11.5vw, 5.2rem); font-weight: 800; }
-.nombre-dorado {
-  display: inline-block;
-  background: linear-gradient(100deg, var(--acento) 20%, #fff6d8 50%, var(--acento) 80%);
-  background-size: 200% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: brillo 5s linear infinite;
-}
-@keyframes brillo { to { background-position: -200% 0; } }
-
-.frase {
-  max-width: 32ch;
-  margin: 12px auto 0;
-  font-family: var(--f-titulo);
-  font-style: italic;
-  font-size: clamp(1.05rem, 4.4vw, 1.35rem);
-  opacity: 0.92;
-}
-.contador {
-  display: inline-block;
-  margin-top: 14px;
-  padding: 6px 16px;
-  border-radius: 999px;
-  border: 1px solid color-mix(in srgb, var(--acento), transparent 40%);
-  background: rgba(255, 255, 255, 0.08);
-  font-size: 0.85rem;
-  font-weight: 400;
-}
-.boton-carta {
-  display: flex;
-  width: 100%;
-  max-width: 380px;
-  margin: 22px auto 0;
-  font-size: 1.02rem;
-  animation: pulso 2.2s ease-in-out infinite;
-}
-@keyframes pulso {
-  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--acento), transparent 40%); }
-  50% { box-shadow: 0 0 0 12px color-mix(in srgb, var(--acento), transparent 100%); }
-}
-.abierta .boton-carta { animation: none; background: rgba(255, 255, 255, 0.12); color: var(--blanco); box-shadow: none; }
 
 /* =================== Animación del sobre =================== */
 .apertura {
@@ -381,8 +343,6 @@ button { font-family: inherit; }
   to { opacity: 1; transform: none; }
 }
 .seguir { display: flex; justify-content: center; margin-top: 32px; }
-.seguir .boton span { display: inline-block; animation: rebotar 1.6s ease-in-out infinite; }
-@keyframes rebotar { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
 
 /* =================== 3. FOTOS (montón de polaroids) =================== */
 #fotos { overflow: hidden; }
@@ -426,7 +386,7 @@ button { font-family: inherit; }
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
+  gap: 32px;
   margin-top: 28px;
 }
 .monton-btn {
@@ -441,7 +401,6 @@ button { font-family: inherit; }
   cursor: pointer;
 }
 .monton-btn:active { transform: scale(0.92); }
-.monton-contador { min-width: 4ch; text-align: center; font-weight: 600; color: var(--texto-suave); font-variant-numeric: tabular-nums; }
 
 /* =================== EXTRAS =================== */
 
@@ -704,36 +663,29 @@ button { font-family: inherit; }
 
 /* =================== Pantallas grandes (tablet / computador) =================== */
 @media (min-width: 860px) {
-  .portada {
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 64px;
-    padding: 48px;
-    background:
-      radial-gradient(ellipse at 30% 20%, var(--principal-2), transparent 65%),
-      var(--principal);
+  .portada { justify-content: center; align-items: center; gap: 26px; padding: 40px 24px; }
+  /* En pantallas grandes: la misma foto, borrosa, de fondo */
+  .portada-fondo {
+    display: block;
+    position: absolute;
+    inset: -60px;
+    background: var(--principal) center / cover no-repeat;
+    filter: blur(40px) brightness(0.55) saturate(1.2);
   }
-  .portada .destellos { top: 0; }
   .portada-foto {
     position: relative;
     inset: auto;
     flex: none;
-    width: min(400px, 38vw);
+    height: min(70vh, 860px);
+    max-width: 90vw;
     aspect-ratio: 4 / 5;
-    border-radius: 24px;
+    border-radius: 22px;
     overflow: hidden;
-    border: 6px solid var(--acento);
-    box-shadow: 0 0 0 12px rgba(255, 255, 255, 0.06), 0 30px 60px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
   }
   .portada-foto::after { display: none; }
-  .portada-foto .foto-falta { justify-content: center; padding-top: 16px; }
-  .portada-texto { max-width: 480px; padding: 0; text-align: left; }
+  .portada-texto { padding: 0; }
   .portada-texto::before { display: none; }
-  .pre-titulo { flex-direction: row; justify-content: flex-start; gap: 10px; }
-  .gorro { font-size: 1.9rem; }
-  .frase { margin-left: 0; }
-  .boton-carta { margin-left: 0; }
 
   .bloque { padding: 100px 24px; }
   .carta { padding: 56px 60px; }
