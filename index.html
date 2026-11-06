@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#1e2a5a">
+  <title>¡Felicidades! 🎓</title>
+
+  <!-- Pide a Google que no muestre la página en búsquedas: solo la ve quien tenga el link -->
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Vista previa al mandar el link por WhatsApp.
+       Cuando tengas tu dirección de Render, cambia TU-SITIO por la real.
+       La foto de portada debería pesar menos de 300 KB para que WhatsApp la muestre. -->
+  <meta property="og:title" content="¡Felicidades, Vale! 🎓">
+  <meta property="og:description" content="Tengo algo para ti 💌">
+  <meta property="og:image" content="https://TU-SITIO.onrender.com/fotos/portada.jpg">
+  <meta property="og:type" content="website">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Playfair+Display:ital,wght@0,600;0,800;1,500&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="estilos.css">
+
+  <!-- Guarda errores de contenido.js para poder mostrarlos de forma amigable -->
+  <script>
+    window.__errores = [];
+    window.addEventListener("error", function (e) { window.__errores.push(e); });
+  </script>
+</head>
+<body>
+  <!-- Todo se arma automáticamente a partir de contenido.js -->
+  <header id="portada" class="portada"></header>
+
+  <!-- Oculto hasta que se abre la carta -->
+  <main id="contenido" hidden></main>
+
+  <!-- Animación del sobre al abrir la carta -->
+  <div id="apertura" class="apertura" hidden aria-hidden="true">
+    <div class="sobre">
+      <div class="sobre-atras"></div>
+      <div class="sobre-papel"></div>
+      <div class="sobre-frente"></div>
+      <div class="sobre-solapa"></div>
+      <div class="sello"></div>
+      <div class="sobre-para"></div>
+    </div>
+  </div>
+
+  <!-- Ventana del mensaje secreto -->
+  <div id="modal" class="modal" hidden>
+    <div class="modal-caja" role="dialog" aria-modal="true">
+      <div class="modal-emoji">🤫</div>
+      <p></p>
+      <button class="boton" type="button">Cerrar</button>
+    </div>
+  </div>
+
+  <button id="btn-musica" class="btn-musica" type="button" hidden aria-label="Música">🎵</button>
+  <audio id="audio" loop preload="none"></audio>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  <script src="contenido.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

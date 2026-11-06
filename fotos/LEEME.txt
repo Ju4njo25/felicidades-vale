@@ -1,0 +1,15 @@
+Pon aquí las fotos con estos nombres (o cambia los nombres en contenido.js):
+
+  portada.jpg   -> la foto grande de la portada (ideal: vertical, de ella sola)
+  foto-1.jpg    -> fotos que aparecen después de la carta
+  foto-2.jpg
+  foto-3.jpg
+  foto-4.jpg
+  foto-5.jpg
+
+Consejos:
+  - Usa .jpg (las fotos .HEIC de iPhone no se ven en Android ni en Chrome).
+  - Nombres sin espacios, sin tildes y en minúsculas: foto-1.jpg y no "Foto 1.JPG".
+    En Render importan las mayúsculas: Foto-1.jpg y foto-1.jpg son archivos distintos.
+  - Achica las fotos antes de subirlas (1600 px de ancho y menos de 500 KB es ideal),
+    por ejemplo en https://squoosh.app  -> así la página carga rápido en el celular.

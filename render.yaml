@@ -1,0 +1,13 @@
+# Configuración para Render (sitio estático, plan gratis).
+# Si creas el sitio con "New > Blueprint", Render lee este archivo solo.
+services:
+  - type: web
+    name: felicidades-vale
+    runtime: static
+    buildCommand: echo "Sitio estatico, no hay nada que compilar"
+    staticPublishPath: .
+    headers:
+      # Para que los cambios se vean de inmediato y no quede guardada una versión vieja
+      - path: /*
+        name: Cache-Control
+        value: no-cache
