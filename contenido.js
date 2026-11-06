@@ -38,7 +38,7 @@ window.CONTENIDO = {
   musica: "",
 
   // Se muestra al tocar 5 veces seguidas el gorro 🎓 del final de la página 🤫
-  mensajeSecreto: "Si encontraste esto: te debo un helado 🍦. Es oficial, quedó por escrito.",
+  mensajeSecreto: "Si encontraste esto: Sacarás 1000 puntos en la PAES, sino malacue jejeje.",
 
 
   // ================= 1. PORTADA =================
@@ -54,16 +54,16 @@ window.CONTENIDO = {
 
   // ================= 2. CARTA =================
   carta: {
-    saludo: "Querida Vale:",
+    saludo: "Querida Tuna:",
     texto: `
-Todavía me acuerdo de tu primer día de colegio: la mochila era más grande que tú y no querías soltarle la mano a mamá. Y mírate ahora.
+Siempre me acordaré de cómo te quejabas cuando me quedaba dormido para irnos al colegio... Suena lejano para mí, pero ahora te toca a ti empezar esta nueva etapa que te llevará a ser aún más increíble de lo que eres.
 
-Escribe aquí todo lo que le quieras decir. Puedes contarle un recuerdo que tengas con ella, lo que más admiras de ella, cómo la has visto crecer estos años...
+Que sepas que siempre estaré disponible para ti (me burlaré) y te apoyaré en todo lo que necesites en el futuro.
 
-Deja una línea en blanco, como aquí arriba, cada vez que quieras empezar un párrafo nuevo.
+Hermana, éxito en todo lo que se te viene y que el camino te lleve a donde quieras llegar.
     `,
     despedida: "Te quiero infinito,",
-    firma: "Tu hermano/a",
+    firma: "Tu hermano Juanjo",
     boton: "Fotitos",
   },
 
@@ -75,11 +75,11 @@ Deja una línea en blanco, como aquí arriba, cada vez que quieras empezar un p�
   // Puedes poner las que quieras: copia una línea y cambia el nombre.
   fotos: {
     lista: [
-      { foto: "fotos/foto-1.jpg", texto: "Escribe aquí algo sobre esta foto" },
-      { foto: "fotos/foto-2.jpg", texto: "Vacaciones en la playa" },
-      { foto: "fotos/foto-3.jpg", texto: "Ese cumpleaños inolvidable" },
-      { foto: "fotos/foto-4.jpg", texto: "Con sus mejores amigas" },
-      { foto: "fotos/foto-5.jpg", texto: "Último día de clases" },
+      { foto: "fotos/foto-1.jpg", texto: "Siempre con la mejor cara" },
+      { foto: "fotos/foto-2.jpg", texto: "De chicos con cara de pavos" },
+      { foto: "fotos/foto-3.jpg", texto: "Disfrutando un pancito y la vida" },
+      { foto: "fotos/foto-4.jpg", texto: "Disfrutando la arena acostaita" },
+      { foto: "fotos/foto-5.jpg", texto: "Con Charlie casi moribundo, pero se pudo" },
     ],
   },
 
@@ -87,9 +87,9 @@ Deja una línea en blanco, como aquí arriba, cada vez que quieras empezar un p�
   // ================= 4. FINAL =================
   final: {
     titulo: "¡Lo lograste!",
-    texto: "Hoy celebramos todo lo que eres y todo lo que vas a ser.",
-    boton: "🎉 ¡Más confeti!",
-    firma: "Con todo mi cariño, tu hermano/a",
+    texto: "Por fin terminaste el colegio maldita.",
+    boton: "🎉",
+    firma: "Con todo mi cariño, Juanjo",
   },
 
 
